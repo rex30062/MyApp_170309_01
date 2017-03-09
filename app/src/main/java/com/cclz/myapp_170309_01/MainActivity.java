@@ -7,33 +7,43 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-public class MainActivity extends AppCompatActivity {
-    CheckBox chk1, chk2, chk3;
+public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
+    CheckBox chk[]=new CheckBox[3];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        chk1 =(CheckBox) findViewById(R.id.checkBox);
-        chk2 =(CheckBox) findViewById(R.id.checkBox);
-        chk3 =(CheckBox) findViewById(R.id.checkBox);
+        chk[0] =(CheckBox) findViewById(R.id.checkBox);
+        chk[1] =(CheckBox) findViewById(R.id.checkBox2);
+        chk[2] =(CheckBox) findViewById(R.id.checkBox3);
 
-        chk1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    Log.d("CHK", "chk1 打勾");
-                }else{
-                    Log.d("CHK", "chk1 不打勾");
-                }
-            }
-        });
+        for(CheckBox c : chk){
+            c.setOnCheckedChangeListener(this);
+        }
     }
 
     public void click1(View v){
-        if(chk1.isChecked()){
+        if(chk[0].isChecked()){
             Log.d("CHK", "檢查後，chk1 有打勾");
         }else {
             Log.d("CHK", "檢查後，chk1 沒有打勾");
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(isChecked){
+            switch (buttonView.getId()){
+                case R.id.checkBox:
+                    Log.d("CHK","chk1 打勾");
+                    break;
+                case R.id.checkBox2:
+                    Log.d("CHK","chk2 打勾");
+                    break;
+                case R.id.checkBox3:
+                    Log.d("CHK","chk3 打勾");
+                    break;
+            }
         }
     }
 }
