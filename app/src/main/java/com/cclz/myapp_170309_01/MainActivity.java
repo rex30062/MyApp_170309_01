@@ -6,9 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 
 public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
     CheckBox chk[]=new CheckBox[3];
+    RadioGroup rg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,10 +18,27 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         chk[0] =(CheckBox) findViewById(R.id.checkBox);
         chk[1] =(CheckBox) findViewById(R.id.checkBox2);
         chk[2] =(CheckBox) findViewById(R.id.checkBox3);
+        rg = (RadioGroup) findViewById(R.id.radioGroup);
 
         for(CheckBox c : chk){
             c.setOnCheckedChangeListener(this);
         }
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radioButton4:
+                        Log.d("RDO", "4");
+                        break;
+                    case R.id.radioButton5:
+                        Log.d("RDO", "5");
+                        break;
+                    case R.id.radioButton6:
+                        Log.d("RDO", "6");
+                        break;
+                }
+            }
+        });
     }
 
     public void click1(View v){
